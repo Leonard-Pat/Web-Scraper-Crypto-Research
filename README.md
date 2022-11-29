@@ -4,7 +4,7 @@
 > Web Scraper for DeepDAO
 
 <div align="center">
-  <img src="https://giphy.com/gifs/Giflytics-gif-jazminantoinette-giflytics-xT9C25UNTwfZuk85WP/giphy.gif" width="480" height="360" allowFullScreen></img>
+  <img src="https://giphy.com/gifs/Giflytics-gif-jazminantoinette-giflytics-xT9C25UNTwfZuk85WP" width="480" height="360" allowFullScreen></img>
   
   <br/>
   <em>Source: <a>https://giphy.com/gifs/season-20-the-simpsons-20x4-3o6MbdY9Nc9G51by5G<a/></em>
