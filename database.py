@@ -60,6 +60,14 @@ def del_query():
 	cursor.execute(query)
 	db_connection.commit()
 
+def create_column():
+	query = """ALTER TABLE Governance
+		ADD Tag varchar(30);"""
+	cursor.execute(query)
+	db_connection.commit()
+
 # create_table()
 
-del_query()
+# del_query()
+
+create_column()
