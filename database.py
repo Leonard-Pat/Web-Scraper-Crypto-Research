@@ -61,8 +61,18 @@ def del_query():
 	db_connection.commit()
 
 def create_column():
+	# query = """ALTER TABLE Governance
+	# 	ADD Tag varchar(30);"""
 	query = """ALTER TABLE Governance
-		ADD Tag varchar(30);"""
+		ADD Type varchar(30);"""
+	cursor.execute(query)
+	db_connection.commit()
+
+def delete_column():
+	query = """ALTER TABLE Governance
+		DROP COLUMN Type"""
+	# query = """ALTER TABLE Governance
+	# 	ADD Type varchar(30);"""
 	cursor.execute(query)
 	db_connection.commit()
 
@@ -71,3 +81,6 @@ def create_column():
 # del_query()
 
 create_column()
+
+# delete_column()
+
