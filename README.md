@@ -1,8 +1,8 @@
-# Web Scraper for Deep DAO
+# Web Scraper for DAO Governance Information
 [![Foundry](https://badgen.net/badge/Selenium/4.1.2/yellow)](https://www.selenium.dev/)
 [![Solidity](https://badgen.net/badge/BS4/4.11.1/purple)](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
 [![Python](https://badgen.net/badge/Python/3.9.10/green)](https://www.python.org/)
-> Web Scraper for DeepDAO
+> Web Scraper for DAO Governance
 
 <div align="center">
   <img src="https://media.giphy.com/media/xT9C25UNTwfZuk85WP/giphy-downsized-large.gif" width="480" height="360" allowFullScreen></img>
@@ -12,7 +12,7 @@
 </div> 
 
 ## Table of Contents
-- [Web Scraper for Deep DAO](#web-scraper-for-deep-dao)
+- [Web Scraper for DAO Governance Information](#web-scraper-for-dao-governance-information)
   - [Table of Contents](#table-of-contents)
   - [General Information](#general-information)
   - [Technologies Used](#technologies-used)
@@ -22,7 +22,7 @@
   - [Project Status](#project-status)
 
 ## General Information
-- Repo was created to scrape governance information on DAOs, on the deep DAO website. For research purposes only (please do not overload deep dao with requests or share information with consent)
+- Repo was created to scrape governance information on DAOs, mainly on the deep DAO and Messari report website. For research purposes only (please do not overload deep dao with requests or share information without consent)
 
 
 ## Technologies Used
@@ -33,6 +33,7 @@
 ## Setup
 ### Requirements 
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+  - Should be able to run `git --version` if done correctly
 - [python](https://www.python.org/downloads/)
   - Should be able to run `python --version` if done correctly
 ### Installation
