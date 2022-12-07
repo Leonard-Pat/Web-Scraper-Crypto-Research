@@ -45,7 +45,7 @@ def delete_existing_column(table, column_name):
 	query = f"ALTER TABLE {table} DROP COLUMN {column_name}"
 	cursor.execute(query)
 	db_connection.commit()
-	print(f"Deleted column:{column_name} from the {table} table.")
+	print(f"Deleted column: {column_name} from the {table} table.")
 
 
 option_functions = {
@@ -71,8 +71,8 @@ def editing_prompt():
 	# Call the corresponding function based on the user input
 	if user_input == 1:
 		table_selection = select_table_prompt()
-		dao_name = input(f'Which DAO would you like to remove from the {table_selection} table? ')
-		new_val = input(f'What is the new value you would like to have? ')
+		dao_name = input(f'Enter DAO would you like to remove from the {table_selection} table: ')
+		new_val = input(f'Enter new value: ')
 		column_name = input('Please select the name of the column you would like to update the value of: ')
 		option_functions[user_input](table_selection, column_name, new_val, dao_name)
 		if table_selection == -1:
@@ -80,7 +80,7 @@ def editing_prompt():
 			return
 	elif user_input == 2:
 		table_selection = select_table_prompt()
-		dao_name = input(f'Which DAO would you like to remove from the {table_selection} table? ')
+		dao_name = input(f'Enter DAO would you like to remove from the {table_selection} table: ')
 		option_functions[user_input](table_selection, dao_name)
 		if table_selection == -1:
 			print('Invalid table goodbye.')
@@ -88,7 +88,7 @@ def editing_prompt():
 	elif user_input == 3:
 		table_selection = select_table_prompt()
 		column_name = input('Please select the name of the column you would like to add: ')
-		var_or_int = input('Would you like the column to be a Var (0) or an INT (1) type? ')
+		var_or_int = input('Enter column type Var (0) or INT (1): ')
 		option_functions[user_input](table_selection, column_name, var_or_int)
 		if table_selection == -1:
 			print('Invalid table goodbye.')
