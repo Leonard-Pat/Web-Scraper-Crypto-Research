@@ -1,7 +1,6 @@
 import sqlite3
 
-
-db_connection = sqlite3.connect("DeepDao.db")
+db_connection = sqlite3.connect("DAOGovernance.db")
 cursor = db_connection.cursor()
 
 def create_table():
@@ -50,37 +49,3 @@ def create_table():
 	);
 	"""
 	cursor.execute(create_treasury)
-
-
-
-def del_query():
-	query = f""" 
-	DELETE FROM Treasury WHERE DAO='Kusama';
-	"""
-	cursor.execute(query)
-	db_connection.commit()
-
-def create_column():
-	# query = """ALTER TABLE Governance
-	# 	ADD Tag varchar(30);"""
-	query = """ALTER TABLE Governance
-		ADD Type varchar(30);"""
-	cursor.execute(query)
-	db_connection.commit()
-
-def delete_column():
-	query = """ALTER TABLE Governance
-		DROP COLUMN Type"""
-	# query = """ALTER TABLE Governance
-	# 	ADD Type varchar(30);"""
-	cursor.execute(query)
-	db_connection.commit()
-
-# create_table()
-
-# del_query()
-
-create_column()
-
-# delete_column()
-
