@@ -1,6 +1,12 @@
 import sqlite3
+import os
+from rich import print
+from rich.console import Console
 
-db_connection = sqlite3.connect("DAOGovernance.db")
+console = Console()
+
+path = os.path.dirname(os.path.realpath(__file__))
+db_connection = sqlite3.connect(path + 'DAOGovernance.db')
 cursor = db_connection.cursor()
 
 def check_exists(dao_name):
@@ -141,4 +147,4 @@ if __name__ == "__main__":
 		# Prompt the user for options to edit the database
 		editing_prompt()
 	except KeyboardInterrupt:
-		print("Thank you goodbye")
+		console.print("\nThank you goodbye", style="magenta")
