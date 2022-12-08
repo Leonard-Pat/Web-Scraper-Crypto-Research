@@ -42,7 +42,7 @@ def delete_existing_record(table, dao):
     # Delete a row from a given table
     if check_exists(dao):
         # prompt the user for confirmation
-        response = input(f"Are you sure you want to delete the record with DAO '{dao}' from the '{table}' table? (y/n)")
+        response = input(f"Are you sure you want to delete the record with DAO '{dao}' from the '{table}' table? (y/n) ")
 
         # check if the user pressed "y"
         if response == "y":
@@ -55,11 +55,9 @@ def delete_existing_record(table, dao):
     else:
         print(f"Sorry the DAO ('{dao}') you have tried to delete does not exist")
 
-def add_new_column(table, column_name, var_or_int):
+def add_new_column(table, column_name, type_of_col):
 	# Add columns for a given table
-	if var_or_int == "1":
-		query = f"ALTER TABLE Governance ADD {column_name} varchar(30)"
-	query = f"ALTER TABLE Governance ADD {column_name} INT"
+	query = f"ALTER TABLE {table} ADD {column_name} {type_of_col}"
 	cursor.execute(query)
 	db_connection.commit()
 	print(f"Added column: {column_name} to the {table} table.")
@@ -67,7 +65,7 @@ def add_new_column(table, column_name, var_or_int):
 def delete_existing_column(table, column_name):
     # Delete columns from a given table
     # prompt the user for confirmation
-    response = input(f"Are you sure you want to delete the '{column_name}' column from the '{table}' table? (y/n)")
+    response = input(f"Are you sure you want to delete the '{column_name}' column from the '{table}' table? (y/n) ")
 
     # check if the user pressed "y"
     if response == "y":
@@ -77,11 +75,21 @@ def delete_existing_column(table, column_name):
         print(f"Deleted column: {column_name} from the {table} table.")
 
 
+def custom_query(query):
+	response = input(f"Are you sure you execute this custom query? (y/n) ")
+	if response == "y":
+		cursor.execute(query)
+		print(cursor.fetchall())
+		db_connection.commit()
+	
+
+
 option_functions = {
 		1: update_existing_record,
 		2: delete_existing_record,
 		3: add_new_column,
-		4: delete_existing_column
+		4: delete_existing_column,
+		5: custom_query
 }
 
 
@@ -90,7 +98,7 @@ def editing_prompt():
 	
 	# Prompt the user for an option
 	beginning_prompt()
-	user_input = int(input('Select an option [1/4]: '))
+	user_input = int(input(f'Select an option [1/{len(option_functions)}]: '))
 
 	# Validate the user input
 	if user_input not in option_functions:
@@ -108,9 +116,6 @@ def editing_prompt():
 		if table_selection == -1:
 			print('Invalid table goodbye.')
 			return
-		if column_selection == -1:
-			print('Invalid column selection')
-			return
 	elif user_input == 2:
 		table_selection = select_table_prompt()
 		dao_name = input(f'Enter DAO would you like to remove from the {table_selection} table: ')
@@ -121,13 +126,10 @@ def editing_prompt():
 	elif user_input == 3:
 		table_selection = select_table_prompt()
 		column_name = input('Please enter the name of the new column: ')
-		var_or_int = input('Enter column type Var (0) or INT (1): ')
-		option_functions[user_input](table_selection, column_name, var_or_int)
+		type_of_col = input('Enter column type: ')
+		option_functions[user_input](table_selection, column_name, type_of_col)
 		if table_selection == -1:
 			print('Invalid table goodbye.')
-			return
-		if column_selection == -1:
-			print('Invalid column selection')
 			return
 	elif user_input == 4:
 		table_selection = select_table_prompt()
@@ -140,7 +142,9 @@ def editing_prompt():
 		if column_selection == -1:
 			print('Invalid column selection')
 			return
-
+	elif user_input == 5:
+		query = input("Please enter query here: ")
+		custom_query(query)
 	
 
 # Define a function to prompt the user for a table selection
@@ -177,7 +181,6 @@ def select_column_prompt(table):
 		return -1
 	else:
 		column_input = column_list[column_input-1]
-		print(column_input)
 		return column_input
 
 def beginning_prompt():
@@ -185,7 +188,8 @@ def beginning_prompt():
 		print(" 1. Update existing record\n",
 		"2. Delete existing record\n",
 		"3. Add new column\n",
-		"4. Delete existing column\n"
+		"4. Delete existing column\n",
+		"5. Custom query\n"
 		)
 
 
