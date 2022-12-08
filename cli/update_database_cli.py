@@ -17,26 +17,43 @@ def check_exists(dao_name):
 	return results  # If the DAO exists, update its values in the table
 
 def update_existing_record(table, column, new_val, dao):
-	# Update a row from a given table
-	if check_exists(dao):
-		query = f"""UPDATE {table} SET 
-		`{column}` = '{new_val}'
-		WHERE DAO = '{dao}'
-		"""
-		cursor.execute(query)
-		db_connection.commit()
-		print(f"Updated DAO: {dao} from the {table} table.")
-	print(f"Sorry the DAO ('{dao}') you have tried to update does not exist")
+    # Update a row from a given table
+    if check_exists(dao):
+        # prompt the user for confirmation
+        response = input(f"Are you sure you want to update the '{column}' column with value '{new_val}' for the record with DAO '{dao}' in the '{table}' table? (y/n)")
+
+        # check if the user pressed "y"
+        if response == "y":
+            query = f"""UPDATE {table} SET 
+            `{column}` = '{new_val}'
+            WHERE DAO = '{dao}'
+            """
+            cursor.execute(query)
+            db_connection.commit()
+            print(f"Updated DAO: {dao} from the {table} table.")
+
+    # if the record does not exist, print a message
+    else:
+        print(f"Sorry the DAO ('{dao}') you have tried to update does not exist")
+
 
 
 def delete_existing_record(table, dao):
-	# Delete a row from a given table
-	if check_exists(dao):
-		query = f"DELETE FROM {table} WHERE DAO = '{dao}'"
-		cursor.execute(query)
-		db_connection.commit()
-		print(f"Deleted DAO: {dao} from the {table} table.")
-	print(f"Sorry the DAO ('{dao}') you have tried to delete does not exist")
+    # Delete a row from a given table
+    if check_exists(dao):
+        # prompt the user for confirmation
+        response = input(f"Are you sure you want to delete the record with DAO '{dao}' from the '{table}' table? (y/n)")
+
+        # check if the user pressed "y"
+        if response == "y":
+            query = f"DELETE FROM {table} WHERE DAO = '{dao}'"
+            cursor.execute(query)
+            db_connection.commit()
+            print(f"Deleted DAO: {dao} from the {table} table.")
+
+    # if the record does not exist, print a message
+    else:
+        print(f"Sorry the DAO ('{dao}') you have tried to delete does not exist")
 
 def add_new_column(table, column_name, var_or_int):
 	# Add columns for a given table
@@ -48,11 +65,16 @@ def add_new_column(table, column_name, var_or_int):
 	print(f"Added column: {column_name} to the {table} table.")
 
 def delete_existing_column(table, column_name):
-	# Delete columns from a given table
-	query = f"ALTER TABLE {table} DROP COLUMN {column_name}"
-	cursor.execute(query)
-	db_connection.commit()
-	print(f"Deleted column: {column_name} from the {table} table.")
+    # Delete columns from a given table
+    # prompt the user for confirmation
+    response = input(f"Are you sure you want to delete the '{column_name}' column from the '{table}' table? (y/n)")
+
+    # check if the user pressed "y"
+    if response == "y":
+        query = f"ALTER TABLE {table} DROP COLUMN {column_name}"
+        cursor.execute(query)
+        db_connection.commit()
+        print(f"Deleted column: {column_name} from the {table} table.")
 
 
 option_functions = {
