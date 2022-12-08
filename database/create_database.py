@@ -1,6 +1,9 @@
 import sqlite3
+import os
 
-db_connection = sqlite3.connect("DAOGovernance.db")
+cwd = os.getcwd()
+db_path = os.path.join(cwd, "database\\DAOGovernance.db")
+db_connection = sqlite3.connect(db_path)
 cursor = db_connection.cursor()
 
 def create_table():
@@ -49,3 +52,14 @@ def create_table():
 	);
 	"""
 	cursor.execute(create_treasury)
+
+
+def execute_sql_script():
+	# read the SQL script from a file
+	cwd = os.getcwd()
+	sql_file = os.path.join(cwd, 'database\\tally.sql')
+	with open(sql_file, 'r') as f:
+		sql = f.read()
+		cursor.executescript(sql)
+
+execute_sql_script()

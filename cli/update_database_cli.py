@@ -5,8 +5,9 @@ from rich.console import Console
 
 console = Console()
 
-path = os.path.dirname(os.path.realpath(__file__))
-db_connection = sqlite3.connect(path + 'DAOGovernance.db')
+cwd = os.getcwd()
+db_path = os.path.join(cwd, "database\\DAOGovernance.db")
+db_connection = sqlite3.connect(db_path)
 cursor = db_connection.cursor()
 
 def check_exists(dao_name):
@@ -77,12 +78,16 @@ def editing_prompt():
 	# Call the corresponding function based on the user input
 	if user_input == 1:
 		table_selection = select_table_prompt()
-		dao_name = input(f'Enter DAO would you like to remove from the {table_selection} table: ')
+		print('Please select the name of the column you would like to update the value of: ')
+		column_name = select_column_prompt(table_selection)
+		dao_name = input(f'Enter DAO would you like to update from the {table_selection} table: ')
 		new_val = input(f'Enter new value: ')
-		column_name = input('Please select the name of the column you would like to update the value of: ')
 		option_functions[user_input](table_selection, column_name, new_val, dao_name)
 		if table_selection == -1:
 			print('Invalid table goodbye.')
+			return
+		if column_selection == -1:
+			print('Invalid column selection')
 			return
 	elif user_input == 2:
 		table_selection = select_table_prompt()
@@ -93,18 +98,25 @@ def editing_prompt():
 			return
 	elif user_input == 3:
 		table_selection = select_table_prompt()
-		column_name = input('Please select the name of the column you would like to add: ')
+		column_name = input('Please enter the name of the new column: ')
 		var_or_int = input('Enter column type Var (0) or INT (1): ')
 		option_functions[user_input](table_selection, column_name, var_or_int)
 		if table_selection == -1:
 			print('Invalid table goodbye.')
 			return
+		if column_selection == -1:
+			print('Invalid column selection')
+			return
 	elif user_input == 4:
 		table_selection = select_table_prompt()
-		column_selection = input('Please select which column you would like to delete: ')
+		print('Please select which column you would like to delete: ')
+		column_selection = select_column_prompt(table_selection)
 		option_functions[user_input](table_selection, column_selection)
 		if table_selection == -1:
 			print('Invalid table goodbye.')
+			return
+		if column_selection == -1:
+			print('Invalid column selection')
 			return
 
 	
@@ -118,7 +130,7 @@ def select_table_prompt():
 	table_list = cursor.fetchall()
 
 	# Prompt the user to select a table
-	print('Please select one of the follow tables:')
+	print('Please select one of the following tables:')
 	num_of_tables = len(table_list)
 	for i, table in enumerate(table_list):
 		print(f'{i+1}. ', table[0])
@@ -131,6 +143,20 @@ def select_table_prompt():
 		table_selection = table_list[table_input-1][0]
 		return table_selection
 
+def select_column_prompt(table):
+	cursor.execute(f"PRAGMA table_info({table})")
+	column_list = [row[1] for row in cursor]
+	num_of_cols = len(column_list)
+	for i,row in enumerate(column_list):
+		print(f'{i+1}. ', row)
+	column_input = int(input(f'Select an option [1/{num_of_cols}]: '))
+
+	if column_input > num_of_cols and num_of_cols < 1:
+		return -1
+	else:
+		column_input = column_list[column_input-1]
+		print(column_input)
+		return column_input
 
 def beginning_prompt():
 		print('\nPlease select one of the following options:')
