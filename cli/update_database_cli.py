@@ -9,9 +9,8 @@ cwd = os.getcwd()
 db_path = os.path.join(cwd, "database/DAOGovernance.db")
 db_connection = sqlite3.connect(db_path)
 cursor = db_connection.cursor()
-
 def check_exists(dao_name):
-	select_query = f"SELECT * FROM Governance WHERE DAO = '{dao_name}';"
+	select_query = f" --sql SELECT * FROM Governance WHERE DAO = '{dao_name}';"
 	cursor.execute(select_query)
 	results = cursor.fetchall()
 	return results  # If the DAO exists, update its values in the table
@@ -24,9 +23,10 @@ def update_existing_record(table, column, new_val, dao):
 
         # check if the user pressed "y"
         if response == "y":
-            query = f"""UPDATE {table} SET 
+            query = f""" --sql
+			UPDATE {table} SET 
             `{column}` = '{new_val}'
-            WHERE DAO = '{dao}'
+            WHERE DAO = '{dao}';
             """
             cursor.execute(query)
             db_connection.commit()
