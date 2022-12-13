@@ -6,6 +6,8 @@ name = "pypi"
 [packages]
 rich = "*"
 supabase = "*"
+pandas = "*"
+numpy = "*"
 
 [dev-packages]
 
