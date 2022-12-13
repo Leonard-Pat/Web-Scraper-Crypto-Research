@@ -2,7 +2,7 @@ import sqlite3
 import os
 
 cwd = os.getcwd()
-db_path = os.path.join(cwd, "database\\DAOGovernance.db")
+db_path = os.path.join(cwd, "database\\raw_data.db")
 db_connection = sqlite3.connect(db_path)
 cursor = db_connection.cursor()
 
