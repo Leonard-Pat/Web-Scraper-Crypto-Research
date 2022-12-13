@@ -144,13 +144,13 @@ def editing_prompt():
 			return
 	elif user_input == 5:
 		query = input("Please enter query here: ")
-		custom_query(query)
-	
+		custom_query(query)	
 
 # Define a function to prompt the user for a table selection
 def select_table_prompt():
 	# Query the list of tables in the database
-	table_names = """SELECT name FROM sqlite_master
+	table_names = """--sql 
+	SELECT name FROM sqlite_master
 	WHERE type='table';"""
 	cursor.execute(table_names)
 	table_list = cursor.fetchall()
