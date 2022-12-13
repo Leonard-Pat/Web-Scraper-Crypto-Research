@@ -7,7 +7,7 @@ db_connection = sqlite3.connect(db_path)
 cursor = db_connection.cursor()
 
 def create_table():
-	create_governance = """
+	create_governance = """ --sql
 	CREATE TABLE IF NOT EXISTS `Governance` (
 	`DAO` VARCHAR(30) DEFAULT NULL,
 	`Treasury AUM (usd)` VARCHAR(30),
@@ -25,7 +25,7 @@ def create_table():
 	);   
 	"""
 	cursor.execute(create_governance)
-	create_treasury = """
+	create_treasury = """ --sql
 	CREATE TABLE IF NOT EXISTS `Treasury` (
 		`DAO` VARCHAR(30),
 		`Top 1 Token (name)` VARCHAR(30),
