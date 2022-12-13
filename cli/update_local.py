@@ -9,15 +9,16 @@ cwd = os.getcwd()
 db_path = os.path.join(cwd, "database/DAOGovernance.db")
 db_connection = sqlite3.connect(db_path)
 cursor = db_connection.cursor()
-def check_exists(dao_name):
-	select_query = f" --sql SELECT * FROM Governance WHERE DAO = '{dao_name}';"
+def check_exists(dao_name, table):
+	select_query = f"SELECT * FROM {table} WHERE DAO = '{dao_name}';"
 	cursor.execute(select_query)
 	results = cursor.fetchall()
+	print(results)
 	return results  # If the DAO exists, update its values in the table
 
 def update_existing_record(table, column, new_val, dao):
     # Update a row from a given table
-    if check_exists(dao):
+    if check_exists(dao, table):
         # prompt the user for confirmation
         response = input(f"Are you sure you want to update the '{column}' column with value '{new_val}' for the record with DAO '{dao}' in the '{table}' table? (y/n)")
 
@@ -34,13 +35,13 @@ def update_existing_record(table, column, new_val, dao):
 
     # if the record does not exist, print a message
     else:
-        print(f"Sorry the DAO ('{dao}') you have tried to update does not exist")
+        print(f"Sorry the DAO: '{dao}' you have tried to update does not exist")
 
 
 
 def delete_existing_record(table, dao):
     # Delete a row from a given table
-    if check_exists(dao):
+    if check_exists(dao, table):
         # prompt the user for confirmation
         response = input(f"Are you sure you want to delete the record with DAO '{dao}' from the '{table}' table? (y/n) ")
 
@@ -53,7 +54,7 @@ def delete_existing_record(table, dao):
 
     # if the record does not exist, print a message
     else:
-        print(f"Sorry the DAO ('{dao}') you have tried to delete does not exist")
+        print(f"Sorry the DAO '{dao}' you have tried to delete does not exist")
 
 def add_new_column(table, column_name, type_of_col):
 	# Add columns for a given table
