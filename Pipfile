@@ -9,6 +9,7 @@ supabase = "*"
 pandas = "*"
 numpy = "*"
 openpyxl = "*"
+seaborn = "*"
 
 [dev-packages]
 ipykernel = "*"
