@@ -40,9 +40,9 @@
 1. `git clone https://github.com/Leonard-Pat/Web-Scraper-Crypto-Research.git`
 2. `cd  Web-Scraper-Crypto-Research`
 <br>
-3. `pip install selenium`
+3. `pip install pipenv`
 <br>
-4. `pip install beautifulsoup4`
+4. `pipenv sync`
 
 
 ## Project Status
