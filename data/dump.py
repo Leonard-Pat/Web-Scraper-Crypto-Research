@@ -20,4 +20,16 @@ df.to_excel("treasury_clean.xlsx")
 df = pd.read_sql("SELECT * FROM proposals_on_chain", db_connection)
 
 # export the DataFrame to an Excel file
-df.to_excel("test.xlsx")
+df.to_excel("proposals_on_chain_clean.xlsx")
+
+# read the data from the database table into a DataFrame
+df = pd.read_sql("SELECT * FROM information", db_connection)
+
+# export the DataFrame to an Excel file
+df.to_excel("information_clean.xlsx")
+
+# read the data from the database table into a DataFrame
+df = pd.read_sql("SELECT * FROM governance_on_chain", db_connection)
+
+# export the DataFrame to an Excel file
+df.to_excel("governance_on_chain.xlsx")
