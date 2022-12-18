@@ -14,10 +14,10 @@ cursor = db_connection.cursor()
 df = pd.read_sql("SELECT * FROM treasury", db_connection)
 
 # export the DataFrame to an Excel file
-df.to_excel("test.xlsx")
+df.to_excel("treasury_clean.xlsx")
 
 # read the data from the database table into a DataFrame
-df = pd.read_sql("SELECT * FROM treasury", db_connection)
+df = pd.read_sql("SELECT * FROM proposals_on_chain", db_connection)
 
 # export the DataFrame to an Excel file
 df.to_excel("test.xlsx")
