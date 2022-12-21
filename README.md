@@ -30,6 +30,8 @@
 - selenium - version 4.1.2
 - beautiful soup 4 - version 4.11.1
 
+Other packages are listed in the pipfile
+
 ## Setup
 ### Requirements 
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
