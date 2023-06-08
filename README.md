@@ -4,13 +4,6 @@
 [![Python](https://badgen.net/badge/Python/3.9.10/green)](https://www.python.org/)
 > Web Scraper for DAO Governance
 
-<div align="center">
-  <img src="https://media.giphy.com/media/xT9C25UNTwfZuk85WP/giphy-downsized-large.gif" width="480" height="360" allowFullScreen></img>
-  
-  <br/>
-  <em>Source: <a>https://giphy.com/gifs/Giflytics-gif-jazminantoinette-giflytics-xT9C25UNTwfZuk85WP<a/></em>
-</div> 
-
 ## Table of Contents
 - [Web Scraper for DAO Governance Information](#web-scraper-for-dao-governance-information)
   - [Table of Contents](#table-of-contents)
